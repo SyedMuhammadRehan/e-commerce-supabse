@@ -7,6 +7,7 @@ import 'package:ecommerce_supabase/views/auth/ui/widgets/custom_text_btn.dart';
 import 'package:ecommerce_supabase/views/auth/ui/widgets/custome_textfield.dart';
 import 'package:flutter/material.dart';
 
+
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
 
@@ -15,63 +16,56 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-    bool isPasswordHidden = true;
+  bool isPasswordHidden = true;
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final maxWidth = size.width;
-    final maxHeight = size.height;
-    final paddingHorizontal = maxWidth * 0.05;
-    final fontSize = maxWidth * 0.05;
-
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            constraints: BoxConstraints(minHeight: maxHeight),
-            padding: EdgeInsets.symmetric(horizontal: paddingHorizontal),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                      FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          "Welcome To Mart🛍️",
+          body: 
+              
+               SafeArea(
+                  child: SingleChildScrollView(
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const Text(
+                          "Welcome To Our Market",
                           style: TextStyle(
-                            fontSize: fontSize,
+                            fontSize: 24,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                      ),
-                      SizedBox(height: maxHeight * 0.03),
-                      Container(
-                        constraints: BoxConstraints(
-                          maxWidth: 600, // Maximum width for larger screens
+                        const SizedBox(
+                          height: 24,
                         ),
-                        child: Card(
+                        Card(
                           color: AppColors.kWhiteColor,
-                          elevation: 4,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
+                          margin: const EdgeInsets.all(24),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(16),
+                            ),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all(maxWidth * 0.04),
+                            padding: const EdgeInsets.all(16.0),
                             child: Column(
                               children: [
                                 CustomTextFormField(
-                                  controller: _emailController,
+                                  controller: emailController,
                                   labelText: "Email",
                                   keyboardType: TextInputType.emailAddress,
                                 ),
-                                SizedBox(height: maxHeight * 0.02),
+                                const SizedBox(
+                                  height: 20,
+                                ),
                                 CustomTextFormField(
-                                  controller: _passwordController,
+                                  controller: passwordController,
                                   keyboardType: TextInputType.visiblePassword,
                                   labelText: "Password",
                                   isSecured: isPasswordHidden,
@@ -86,7 +80,9 @@ class _LoginViewState extends State<LoginView> {
                                         : Icons.visibility_off),
                                   ),
                                 ),
-                                SizedBox(height: maxHeight * 0.02),
+                                const SizedBox(
+                                  height: 20,
+                                ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
@@ -98,53 +94,66 @@ class _LoginViewState extends State<LoginView> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: maxHeight * 0.02),
+                                const SizedBox(
+                                  height: 20,
+                                ),
                                 CustomRowWithArrowBtn(
                                   text: "Login",
                                   onTap: () {
                                     if (_formKey.currentState!.validate()) {
+                                   
                                     }
                                   },
                                 ),
-                                SizedBox(height: maxHeight * 0.02),
+                                const SizedBox(
+                                  height: 20,
+                                ),
                                 CustomRowWithArrowBtn(
                                   text: "Login With Google",
-                                  onTap: () {},
+                                  onTap: () => {}
                                 ),
-                                SizedBox(height: maxHeight * 0.02),
-                                FittedBox(
-                                  fit: BoxFit.scaleDown,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "Don't Have an account?",
-                                        style: TextStyle(
-                                          fontSize: fontSize * 0.7,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Text(
+                                      "Don't Have an account?",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                      SizedBox(width: maxWidth * 0.01),
-                                      CustomTextButton(
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    CustomTextButton(
                                         text: "Sign Up",
                                         onTap: () {
-                                          navigateTo(context, const SignupView());
-                                        },
-                                      )
-                                    ],
-                                  ),
+                                          navigateTo(
+                                              context, const SignupView());
+                                        })
+                                  ],
                                 )
                               ],
                             ),
                           ),
-                        ),
-                      ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
+                        )
+                      ],
+                    ),
+                  ),
+                )),
+      
+      
+        );
+   
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 }

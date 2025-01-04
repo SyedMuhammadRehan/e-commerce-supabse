@@ -12,41 +12,16 @@ class CustomTextButton extends StatelessWidget {
   final String text;
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final maxWidth = constraints.maxWidth;
-        final fontSize = maxWidth * 0.045; // 4.5% of width
-        
-        return Container(
-          constraints: const BoxConstraints(
-            maxWidth: 200, // Maximum width for larger screens
-          ),
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: onTap,
-              borderRadius: BorderRadius.circular(8),
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: maxWidth * 0.02,
-                  vertical: maxWidth * 0.01,
-                ),
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    text,
-                    style: TextStyle(
-                      color: AppColors.kPrimaryColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: fontSize,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        );
-      },
+    return InkWell(
+      onTap: onTap,
+      child: Text(
+        text,
+        style: const TextStyle(
+          color: AppColors.kPrimaryColor,
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
+        ),
+      ),
     );
   }
 }
