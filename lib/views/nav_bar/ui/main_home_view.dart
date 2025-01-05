@@ -10,8 +10,8 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 
 
 class MainHomeView extends StatefulWidget {
-  MainHomeView({super.key, required this.userDataModel});
-  final UserDataModel userDataModel;
+  MainHomeView({super.key, });
+  // final UserDataModel userDataModel;
 
   @override
   State<MainHomeView> createState() => _MainHomeViewState();
@@ -22,7 +22,9 @@ late List<Widget> views;
   @override
   void initState() {
      views = [
-     HomeView(userDataModel: widget.userDataModel,),
+     HomeView(
+      // userDataModel: widget.userDataModel,
+      ),
     const StoreView(),
     const FavoriteView(),
     const ProfileView(),

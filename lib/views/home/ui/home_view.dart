@@ -1,8 +1,10 @@
 import 'package:ecommerce_supabase/views/auth/logic/models/user_model.dart';
 import 'package:flutter/material.dart';
 class HomeView extends StatefulWidget {
-  const HomeView({super.key, required this.userDataModel});
-  final UserDataModel userDataModel;
+  const HomeView({super.key});
+
+  // const HomeView({super.key, required this.userDataModel});
+  // final UserDataModel userDataModel;
 
   @override
   State<HomeView> createState() => _HomeViewState();
