@@ -13,6 +13,7 @@ migrate_working_dir/
 *.cc
 CMakeLists.txt
 *.cmake
+.env
 
 # IntelliJ related
 *.iml
@@ -23,6 +24,7 @@ CMakeLists.txt
 # VS Code related
 .vscode/
 *.code-workspace
+
 
 # Flutter/Dart/Pub related
 **/doc/api/

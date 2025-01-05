@@ -1,7 +1,15 @@
 import 'package:ecommerce_supabase/views/auth/ui/login_view.dart';
 import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+void main() async{
 
-void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load();
+  await Supabase.initialize(
+    url: 'https://srpdlbscsltxoclyokwf.supabase.co',
+    anonKey:dotenv.env['Annon_api_key']!,
+  );
   runApp(const MyApp());
 }
 
