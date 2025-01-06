@@ -1,5 +1,6 @@
 import 'package:ecommerce_supabase/core/app_colors.dart';
 import 'package:ecommerce_supabase/core/functions/navigate_to.dart';
+import 'package:ecommerce_supabase/core/functions/navigate_without_back.dart';
 import 'package:ecommerce_supabase/views/auth/logic/cubit/authentication_cubit.dart';
 import 'package:ecommerce_supabase/views/auth/ui/forgot_view.dart';
 import 'package:ecommerce_supabase/views/auth/ui/signup_view.dart';
@@ -29,7 +30,7 @@ class _LoginViewState extends State<LoginView> {
     return BlocConsumer<AuthenticationCubit,AuthenticationState>(
       listener: (context, state) {
         if (state is LoginSuccess) {
-          navigateTo(context,  MainHomeView());
+          navigateWithoutBack(context,  MainHomeView());
         }
         if (state is LoginError) {
           ScaffoldMessenger.of(context).showSnackBar(

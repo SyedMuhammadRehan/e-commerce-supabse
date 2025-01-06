@@ -2,15 +2,15 @@ import 'package:ecommerce_supabase/core/app_colors.dart';
 import 'package:ecommerce_supabase/views/auth/logic/models/user_model.dart';
 import 'package:ecommerce_supabase/views/favorite/ui/favorite_view.dart';
 import 'package:ecommerce_supabase/views/home/ui/home_view.dart';
+import 'package:ecommerce_supabase/views/nav_bar/logic/cubit/nav_bar_cubit.dart';
 import 'package:ecommerce_supabase/views/profile/ui/profile_view.dart';
 import 'package:ecommerce_supabase/views/store/ui/store_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-
 class MainHomeView extends StatefulWidget {
-  MainHomeView({super.key, });
+  // MainHomeView({super.key, required this.userDataModel});
   // final UserDataModel userDataModel;
 
   @override
@@ -22,9 +22,7 @@ late List<Widget> views;
   @override
   void initState() {
      views = [
-     HomeView(
-      // userDataModel: widget.userDataModel,
-      ),
+     HomeView(),
     const StoreView(),
     const FavoriteView(),
     const ProfileView(),
@@ -36,11 +34,14 @@ late List<Widget> views;
 
   @override
   Widget build(BuildContext context) {
-    return 
-          
-           Scaffold(
+    return BlocProvider(
+      create: (context) => NavBarCubit(),
+      child: BlocBuilder<NavBarCubit, NavBarState>(
+        builder: (context, state) {
+          NavBarCubit cubit = context.read<NavBarCubit>();
+          return Scaffold(
             body: SafeArea(
-              child: views[1],
+              child: views[cubit.currentIndex],
             ),
             bottomNavigationBar: Container(
               decoration: const BoxDecoration(
@@ -53,7 +54,7 @@ late List<Widget> views;
                 ),
                 child: GNav(
                     onTabChange: (index) {
-              
+                      cubit.changeCurrentIndex(index);
                     },
                     rippleColor: AppColors
                         .kPrimaryColor, // tab button ripple color when pressed
@@ -93,7 +94,8 @@ late List<Widget> views;
               ),
             ),
           );
-        }
-     
+        },
+      ),
+    );
   }
-
+}
